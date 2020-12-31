@@ -1,0 +1,11 @@
+{
+  "nbs.app_name" : "FC-Integrate-TingYun",
+  "nbs.agent_enabled" : true,
+  "dataSentInterval": 1,
+  "nbs.license_key" : "replace with your own key",
+  "nbs.log_file_name" : "/tmp/tingyun.log",
+  "nbs.audit" : true,
+  "nbs.max_log_count": 3,
+  "nbs.max_log_size": 9,
+  "nbs.ssl" : true
+}
