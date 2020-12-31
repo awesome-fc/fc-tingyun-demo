@@ -17,10 +17,10 @@ Next we introduce how to integrate Tingyun in FC, follow our steps and you will 
 
 ## Solutions to integrate with Tingyun
 ### Before you begin
-* Register Tingyun and get your licence key (You can get your licence key when you create application)
+1. Register Tingyun and get your licence key (You can get your licence key when you create application)
 ![tingyun](https://yqintl.alicdn.com/019bbd9d2b9d1dc697e630e77a6233ad2b938164.png)
 
-* Register FunctionCompute .
+2. Register FunctionCompute .
 
 ### Step 1: Prepare the environment
 An easy and simple way to install Funcraft is to download the executable binary files.
@@ -39,77 +39,80 @@ Allow to anonynously report usage statistics to improve the tool over time? (Y/n
 ```
 
 ### Step 2: Deploy application
-1.Run the following command to clone the sample project to your local machine.
-```
-git clone https://github.com/awesome-fc/fc-tingyun-demo.git
-```
-2.Run the following command to access the cloned sample project:
-```
-cd fc-tingyun-demo
-```
-3.Replace licence key in tingyun.json with your own license key
-```
-{
-  "nbs.app_name" : "my-ty-app",
-  "nbs.agent_enabled" : true,
-  "dataSentInterval": 1,
-  "nbs.license_key" : "replace with your own key",
-  "nbs.log_file_name" : "/tmp/tingyun.log",
-  "nbs.audit" : true,
-  "nbs.max_log_count": 3,
-  "nbs.max_log_size": 9,
-  "nbs.ssl" : true
-}
-```
-Run the following command to deploy the function:
-```
-make deploy
-```
-4.The following result is returned:
-```
-➜  tingyun make deploy 
-docker build -t fc-go-runtime  -f build-image/Dockerfile build-image
-Sending build context to Docker daemon  2.048kB
-Step 1/5 : FROM golang:1.12.16-stretch
- ---> 7ad03a8aece5
-Step 2/5 : RUN mkdir -p $GOPATH/src/golang.org/x/
- ---> Using cache
- ---> 5678ac31beda
-Step 3/5 : RUN cd $GOPATH/src/golang.org/x/ && git clone https://github.com/golang/net.git
- ---> Using cache
- ---> 77d355f1730b
-Step 4/5 : RUN cd $GOPATH/src/golang.org/x/ &&  git clone https://github.com/golang/sys.git
- ---> Using cache
- ---> 414d3e786a8e
-Step 5/5 : RUN go get github.com/TingYunAPM/go
- ---> Using cache
- ---> 4c08b95694b5
-Successfully built 4c08b95694b5
-Successfully tagged fc-go-runtime:latest
-docker run --rm -it -v $(pwd):/tmp fc-go-runtime bash -c "go build -o /tmp/code//bootstrap /tmp/code/main.go"
-chmod +x code/bootstrap
-fun deploy -y
-using template: template.yml
-using region: cn-shenzhen
-using accountId: ***********3743
-using accessKeyId: ***********Ts6J
-using timeout: 20
-Collecting your services information, in order to caculate devlopment changes...
-Resources Changes(Beta version! Only FC resources changes will be displayed):
-┌─────────────────────┬──────────────────────────────┬────────┬──────────┐
-│ Resource            │ ResourceType                 │ Action │ Property │
-├─────────────────────┼──────────────────────────────┼────────┼──────────┤
-│ tingyun-integration │ Aliyun::Serverless::Function │ Modify │ CodeUri  │
-└─────────────────────┴──────────────────────────────┴────────┴──────────┘
-Waiting for service fc-integrate-with-third-apm to be deployed...
-        make sure role 'aliyunfcgeneratedrole-cn-shenzhen-xxx' is exist
-        role 'aliyunfcgeneratedrole-cn-shenzhen-xxx' is already exist
-        Waiting for function tingyun-integration to be deployed...
-                Waiting for packaging function tingyun-integration code...
-                The function tingyun-integration has been packaged. A total of 2 files were compressed and the final size was 4.16 MB
-        function tingyun-integration deploy success
-service xxx deploy success
-```
+1. Run the following command to clone the sample project to your local machine.
+
+    ```
+    git clone https://github.com/awesome-fc/fc-tingyun-demo.git
+    ```
+
+2. Run the following command to access the cloned sample project:
+    ```
+    cd fc-tingyun-demo
+    ```
+
+3. Replace licence key in tingyun.json with your own license key
+    ```
+    {
+      "nbs.app_name" : "my-ty-app",
+      "nbs.agent_enabled" : true,
+      "dataSentInterval": 1,
+      "nbs.license_key" : "replace with your own key",
+      "nbs.log_file_name" : "/tmp/tingyun.log",
+      "nbs.audit" : true,
+      "nbs.max_log_count": 3,
+      "nbs.max_log_size": 9,
+      "nbs.ssl" : true
+    }
+    ```
+4. Run the following command to deploy the function:
+    ```
+    make deploy
+    ```
+5. The following result is returned:
+    ```
+    ➜  tingyun make deploy 
+    docker build -t fc-go-runtime  -f build-image/Dockerfile build-image
+    Sending build context to Docker daemon  2.048kB
+    Step 1/5 : FROM golang:1.12.16-stretch
+     ---> 7ad03a8aece5
+    Step 2/5 : RUN mkdir -p $GOPATH/src/golang.org/x/
+     ---> Using cache
+     ---> 5678ac31beda
+    Step 3/5 : RUN cd $GOPATH/src/golang.org/x/ && git clone https://github.com/golang/net.git
+     ---> Using cache
+     ---> 77d355f1730b
+    Step 4/5 : RUN cd $GOPATH/src/golang.org/x/ &&  git clone https://github.com/golang/sys.git
+     ---> Using cache
+     ---> 414d3e786a8e
+    Step 5/5 : RUN go get github.com/TingYunAPM/go
+     ---> Using cache
+     ---> 4c08b95694b5
+    Successfully built 4c08b95694b5
+    Successfully tagged fc-go-runtime:latest
+    docker run --rm -it -v $(pwd):/tmp fc-go-runtime bash -c "go build -o /tmp/code//bootstrap /tmp/code/main.go"
+    chmod +x code/bootstrap
+    fun deploy -y
+    using template: template.yml
+    using region: cn-shenzhen
+    using accountId: ***********3743
+    using accessKeyId: ***********Ts6J
+    using timeout: 20
+    Collecting your services information, in order to caculate devlopment changes...
+    Resources Changes(Beta version! Only FC resources changes will be displayed):
+    ┌─────────────────────┬──────────────────────────────┬────────┬──────────┐
+    │ Resource            │ ResourceType                 │ Action │ Property │
+    ├─────────────────────┼──────────────────────────────┼────────┼──────────┤
+    │ tingyun-integration │ Aliyun::Serverless::Function │ Modify │ CodeUri  │
+    └─────────────────────┴──────────────────────────────┴────────┴──────────┘
+    Waiting for service fc-integrate-with-third-apm to be deployed...
+            make sure role 'aliyunfcgeneratedrole-cn-shenzhen-xxx' is exist
+            role 'aliyunfcgeneratedrole-cn-shenzhen-xxx' is already exist
+            Waiting for function tingyun-integration to be deployed...
+                    Waiting for packaging function tingyun-integration code...
+                    The function tingyun-integration has been packaged. A total of 2 files were compressed and the final size was 4.16 MB
+            function tingyun-integration deploy success
+    service xxx deploy success
+    ```
 
 Application has been deployed successfully, and your function can be monitored by tingyun. 
 
