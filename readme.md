@@ -4,10 +4,10 @@ Under the general trend of cloud native, application containerization and server
 Alibaba Cloud FunctionCompute (FC), released in 2017, is one of the earliest Serverless Cloud Services in China. Function as a service (FaaS) frees developers from operations such as servers management, resource planning. 
 
 FC supports sub-seconds rapid auto-scaling and organizations only pay for the actual usage. However, FaaS vendors abstract many concepts that DevOps are already familiar with, which poses several new observability challenges compared with Serverfull technologies:
-• Lack of instance/container level metrics and insights, such as CPU, networking traffic
-• Single responsibility functions are distributed with arbitrary concurrency that can become difficult to trace the individual requests
-• Functions usually invoke other cloud services such as SQL/NoSQL databases or message queues.
-• Cannot exec/ssh to an individual instance to perform performance profiling and other advanced investigation tooling.
+* Lack of instance/container level metrics and insights, such as CPU, networking traffic
+* Single responsibility functions are distributed with arbitrary concurrency that can become difficult to trace the individual requests
+* Functions usually invoke other cloud services such as SQL/NoSQL databases or message queues.
+* Cannot exec/ssh to an individual instance to perform performance profiling and other advanced investigation tooling.
 
 Tingyun platform, one of the authoritative application performance monitoring platforms in China, is also always paying attention to the evolution of cloud native technology and new challenges in the field of observability. With observability capabilities of Tingyun APM , developers know well of the application by  instance-level monitoring, distributed tracing and link tracing.
 
@@ -17,11 +17,10 @@ Next we introduce how to integrate Tingyun in FC, follow our steps and you will 
 
 ## Solutions to integrate with Tingyun
 ### Before you begin
-• Register Tingyun and get your licence key (You can get your licence key when you create application)
+* Register Tingyun and get your licence key (You can get your licence key when you create application)
 ![tingyun](https://yqintl.alicdn.com/019bbd9d2b9d1dc697e630e77a6233ad2b938164.png)
 
-
-• Register FunctionCompute .
+* Register FunctionCompute .
 
 ### Step 1: Prepare the environment
 An easy and simple way to install Funcraft is to download the executable binary files.
@@ -40,15 +39,15 @@ Allow to anonynously report usage statistics to improve the tool over time? (Y/n
 ```
 
 ### Step 2: Deploy application
-1. Run the following command to clone the sample project to your local machine.
+1.Run the following command to clone the sample project to your local machine.
 ```
 git clone https://github.com/awesome-fc/fc-tingyun-demo.git
 ```
-2. Run the following command to access the cloned sample project:
+2.Run the following command to access the cloned sample project:
 ```
 cd fc-tingyun-demo
 ```
-3. Replace licence key in tingyun.json with your own license key
+3.Replace licence key in tingyun.json with your own license key
 ```
 {
   "nbs.app_name" : "my-ty-app",
@@ -66,7 +65,7 @@ Run the following command to deploy the function:
 ```
 make deploy
 ```
-1. The following result is returned:
+4.The following result is returned:
 ```
 ➜  tingyun make deploy 
 docker build -t fc-go-runtime  -f build-image/Dockerfile build-image
